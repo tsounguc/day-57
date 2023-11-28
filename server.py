@@ -28,13 +28,13 @@ def gues_page(name):
     return render_template("index.html", name=name, gender=genderize_data['gender'], age=agify_data['age'])
 
 
-@app.route('/blog')
-def blog_page():
+@app.route('/blog/<int:num>')
+def blog_page(num):
     blog_url = "https://api.npoint.io/31f3edd52b60ab8cee6e"
     blog_response = requests.get(url=blog_url)
     blog_response.raise_for_status()
     blog_data = blog_response.json()
-    return render_template("blog.html", blogs=blog_data)
+    return render_template("blog.html", blogs=blog_data, num=num)
 
 
 if __name__ == "__main__":
